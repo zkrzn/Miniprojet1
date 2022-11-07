@@ -4,7 +4,7 @@ import pandas as pd
 st.title('Mini Projet 1 - PYTHON')
 
 #data = st.file_uploader('Upload a XSL')
-xl_file = 'https://github.com/zkrzn/Miniprojet1/raw/main/mini_projet_1.xlsx'
+xl_file = st.secrets["public_gsheets_url"]
 
 
 # Preparation des dataframes
