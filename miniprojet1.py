@@ -1,20 +1,18 @@
+# Importation des librairies 
 import streamlit as st
 import pandas as pd
 
+# Nom de l'app streamlit
 st.title('Mini Projet 1 - PYTHON')
 
-#data = st.file_uploader('Upload a XSL')
+# Recupiration du fichier Excel (on peut le changer avec le fichier qui contient 700 Chercheurs)
 xl_file = st.secrets["public_gsheets_url"]
 
-
-# Preparation des dataframes
+# Préparation et nettoyage des dataframes (Deux DF la 1ere principale, la 2éme contient que les membres des structures de recherche partenaires)
 df = pd.read_excel(xl_file, usecols=['Id', 'Nom','Prenom','Université','Grade',	'Spécialité','Structure de recherche Porteuse'])
 df_1=df.dropna().reset_index(drop=True)
 df_1.Id = df_1.Id.astype(int)
-
 df2 = pd.read_excel(xl_file, usecols=['Nom et Prénom'	,'Grade',	'Spécialité','Intitulé de la structure'], header=1)
-#df_2=df2.dropna().reset_index(drop=True)
-
 df3 = pd.read_excel(xl_file, usecols='L,M')
 df4=df3.dropna().reset_index(drop=True)
 df_3 = df4.rename(columns={"Unnamed: 12":"Nombre"})
@@ -24,11 +22,10 @@ df_3 = df4.rename(columns={"Unnamed: 12":"Nombre"})
  #   print(df_1.to_string(index=False))
 #    print(df2.to_string(index=False))
 
-
+# Creation de la 2éme Dataframe
 list_article = []
 list_communications = []
 list_these = []
-
 for i in range(0, len(df_3), 3):
     list_article.append(int(df_3['Nombre'][i]))
 
@@ -41,13 +38,13 @@ for i in range(2, len(df_3), 3):
 df_1['Articles']=list_article
 df_1['Communications']=list_communications
 df_1['Theses']=list_these
-
-
 df_stru = pd.read_excel(xl_file, usecols='A', header=1)
 df_stru1 = df_stru['Unnamed: 0'].interpolate(method='pad')
 df2['id']=df_stru1
 df2 = df2.dropna()
 
+
+# Fonction pour récupérer le total des membres d'une structure
 def count_members(i):
     count = 0
     list_membres = []
@@ -59,6 +56,7 @@ def count_members(i):
     return count
 
 
+# Fonction pour récupérer la liste des structures associée à un chercheur
 def list_structure(i):
     list_structure = list()
     for t in df2.index:
@@ -73,6 +71,7 @@ def list_structure(i):
     return chaine
 
 
+# Fonction pour récupérer la liste des specialtés associée d'un chercheur
 def list_specialite(i):
     list_specialite = list()
     for t in df2.index:
@@ -86,6 +85,7 @@ def list_specialite(i):
     chaine = chaine.replace('\'','')
     return chaine
 
+# Fonction pour afficher les informations d'un chercheur selon son id 
 def afficher_info(id):
     st.markdown(f'#### id : {id}')
     st.markdown(f'### Nom : {df_1.Nom[id-1]}')
@@ -102,7 +102,7 @@ def afficher_info(id):
     st.markdown(f'#### Nombre de thèses encadrées : {df_1["Theses"][id-1]}')
 
 
-
+# Fonction pour crée un e dataframe contenant les membres des structures de recherche partenaires
 def struct_df(id):
     df = df2[df2['id']==id]
     df = df[['Nom et Prénom','Grade','Spécialité','Intitulé de la structure']].copy()
@@ -110,8 +110,11 @@ def struct_df(id):
 
 #st.dataframe(data=df_1, width=None, height=None, use_container_width=True)
 
+
+# Creation des tabs streamlit
 tabs1, tabs2, tabs3, tabs4, tabs5, tabs6, tabs7, tabs8, tabs9 = st.tabs(['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5', 'Question 6', 'Question 7', 'Question 8', 'Question 9'])
 
+# Reponse pour chaque question du miniprojet
 with tabs1 :
     st.markdown('### Donner le nombre d’articles pour chaque chercheur ')
     with st.echo():
