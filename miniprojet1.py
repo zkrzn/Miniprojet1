@@ -169,7 +169,7 @@ with tabs8 :
     st.markdown(f'####  id : {id} => {df_1.Nom[id-1]} {df_1.Prenom[id-1]}')
 
 with tabs9 :
-    st.markdown('### Effectuer une recherche par le champ Id et afficher ces informations')
+    st.markdown('### Effectuer une recherche par le champ Id et afficher ses informations')
     id = st.number_input('Selectionner l\'id ', 1, 4, key=2)
     afficher_info(id)
 
