@@ -5,7 +5,7 @@ import pandas as pd
 # Nom de l'app streamlit
 st.title('Mini Projet 1 - PYTHON')
 
-# Recupiration du fichier Excel (on peut le changer avec le fichier qui contient 700 Chercheurs)
+# Recupération du fichier Excel (on peut le changer avec le fichier qui contient 700 Chercheurs)
 xl_file = st.secrets["public_gsheets_url"]
 
 # Préparation et nettoyage des dataframes (Deux DF la 1ere principale, la 2éme contient que les membres des structures de recherche partenaires)
