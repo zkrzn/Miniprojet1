@@ -109,6 +109,7 @@ def struct_df(id):
     st.dataframe(df)
 
 #st.dataframe(data=df_1, width=None, height=None, use_container_width=True)
+# Recuperer le nombre de chercheur dans la principale dataframe 
 idf = len(df_1)
 
 # Creation des tabs streamlit
