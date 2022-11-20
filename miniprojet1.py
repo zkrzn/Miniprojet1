@@ -109,7 +109,7 @@ def struct_df(id):
     st.dataframe(df)
 
 #st.dataframe(data=df_1, width=None, height=None, use_container_width=True)
-
+idf = int(df_1.index)
 
 # Creation des tabs streamlit
 tabs1, tabs2, tabs3, tabs4, tabs5, tabs6, tabs7, tabs8, tabs9 = st.tabs(['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5', 'Question 6', 'Question 7', 'Question 8', 'Question 9'])
@@ -165,12 +165,12 @@ with tabs7 :
 
 with tabs8 :
     st.markdown('### Effectuer une recherche par le champ Id et afficher le nom et le prénom du chercheur')
-    id = st.number_input('Selectionner l\'id ', 1, df_1.index, key=1)
+    id = st.number_input('Selectionner l\'id ', 1, idf, key=1)
     st.markdown(f'####  id : {id} => {df_1.Nom[id-1]} {df_1.Prenom[id-1]}')
 
 with tabs9 :
     st.markdown('### Effectuer une recherche par le champ Id et afficher ses informations')
-    id = st.number_input('Selectionner l\'id ', 1, df_1.index, key=2)
+    id = st.number_input('Selectionner l\'id ', 1, idf, key=2)
     afficher_info(id)
 
 
