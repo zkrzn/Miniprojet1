@@ -109,7 +109,7 @@ def struct_df(id):
     st.dataframe(df)
 
 #st.dataframe(data=df_1, width=None, height=None, use_container_width=True)
-idf = int(df_1.index)
+idf = df_1.index
 
 # Creation des tabs streamlit
 tabs1, tabs2, tabs3, tabs4, tabs5, tabs6, tabs7, tabs8, tabs9 = st.tabs(['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5', 'Question 6', 'Question 7', 'Question 8', 'Question 9'])
